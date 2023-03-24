@@ -1,0 +1,10 @@
+from scapy.all import *
+
+def packet_handler(pkt):
+    # This function will be called for each captured packet
+    # Add code here to analyze the packet data
+    # Example: print the source and destination IP addresses
+    print(f"Source IP: {pkt[IP].src}  Destination IP: {pkt[IP].dst}")
+
+# Start capturing packets
+sniff(prn=packet_handler)
