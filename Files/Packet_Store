@@ -1,0 +1,33 @@
+import mysql.connector
+from mysql.connector import Error
+
+# Connect to the MySQL server
+try:
+    connection = mysql.connector.connect(host='localhost',
+                                         database='network_monitor',
+                                         user='root',
+                                         password='password')
+    if connection.is_connected():
+        print('Connected to MySQL database')
+
+    # Create a table to store the packet data
+    cursor = connection.cursor()
+    create_table_query = '''CREATE TABLE packets
+                            (id INT AUTO_INCREMENT PRIMARY KEY,
+                             timestamp DATETIME NOT NULL,
+                             src_ip VARCHAR(15) NOT NULL,
+                             dst_ip VARCHAR(15) NOT NULL)'''
+    cursor.execute(create_table_query)
+
+    # Insert the packet data into the database
+    insert_query = "INSERT INTO packets (timestamp, src_ip, dst_ip) VALUES (%s, %s, %s)"
+    cursor.execute(insert_query, (timestamp, src_ip, dst_ip))
+    connection.commit()
+
+except Error as e:
+    print('Error:', e)
+
+finally:
+    # Close the database connection
+    cursor.close()
+    connection.close()
