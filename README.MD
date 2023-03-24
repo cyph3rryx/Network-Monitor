@@ -17,14 +17,17 @@ This tool captures network traffic and stores the packet data in a MySQL databas
     
     3. Install the MySQL Connector/Python library using pip:
 
+``` python 
 pip install mysql-connector-python
-
+```
 
 ## Usage
 
     1. Start the network monitoring tool by running the following command in the terminal:
 
+``` python 
 python network_monitor.py
+```
 
     2. The tool will start capturing packets on the default network interface (eth0). You can change the interface by modifying the cap variable in the network_monitor.py file.
     
